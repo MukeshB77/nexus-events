@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { getEvents } from "@repo/db";
 import Link from "next/link";
+import Image from "next/image";
 
 import { SearchBar } from "@/components/SearchBar";
 
@@ -86,7 +87,7 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
                 {/* Image Placeholder */}
                 <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-purple-50 relative overflow-hidden group-hover:from-purple-200 group-hover:to-purple-100 transition-colors">
                   {evt.image_url ? (
-                    <img src={evt.image_url} alt={evt.title} className="w-full h-full object-cover" />
+                    <Image src={evt.image_url} alt={evt.title} fill className="w-full h-full object-cover" />
                   ) : (
                     <div className="absolute inset-0 bg-purple-200/20 mix-blend-overlay"></div>
                   )}
