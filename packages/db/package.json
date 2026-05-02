@@ -1,0 +1,14 @@
+{
+  "name": "@repo/db",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.3"
+  }
+}
