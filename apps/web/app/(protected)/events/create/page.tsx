@@ -25,7 +25,7 @@ const formSchema = z.object({
   startDate: z.string().min(1, "Start Date is required"),
   startTime: z.string().min(1, "Start Time is required"),
   location: z.string().min(1, "Location is required"),
-  capacity: z.number().int().positive().optional(),
+  capacity: z.string().optional(),
 });
 
 export default function CreateEventPage() {
@@ -42,7 +42,7 @@ export default function CreateEventPage() {
       startDate: new Date().toISOString().split("T")[0],
       startTime: "12:00",
       location: "",
-      capacity: 100,
+      capacity: "100",
     },
   });
 
@@ -90,7 +90,7 @@ export default function CreateEventPage() {
         description: data.description,
         date: combinedDate,
         location: data.location,
-        capacity: data.capacity ? Number(data.capacity) : undefined,
+        capacity: data.capacity ? parseInt(data.capacity, 10) : undefined,
         image_url: image_url,
         organizer_id: userData.user.id
       });
