@@ -25,7 +25,7 @@ const formSchema = z.object({
   startDate: z.string().min(1, "Start Date is required"),
   startTime: z.string().min(1, "Start Time is required"),
   location: z.string().min(1, "Location is required"),
-  capacity: z.coerce.number().int().positive().optional(),
+  capacity: z.union([z.string(), z.number()]).optional(),
 });
 
 export default function CreateEventPage() {
@@ -90,7 +90,7 @@ export default function CreateEventPage() {
         description: data.description,
         date: combinedDate,
         location: data.location,
-        capacity: data.capacity,
+        capacity: data.capacity ? Number(data.capacity) : undefined,
         image_url: image_url,
         organizer_id: userData.user.id
       });
