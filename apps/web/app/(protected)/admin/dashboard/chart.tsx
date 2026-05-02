@@ -2,7 +2,11 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-export function DashboardChart({ data }: { data: { name: string; attendees: number; [key: string]: unknown }[] }) {
+export interface ChartDataPoint {
+  [key: string]: string | number;
+}
+
+export function DashboardChart({ data }: { data: ChartDataPoint[] }) {
   if (!data || data.length === 0) {
     return (
       <div className="flex bg-purple-50 justify-center items-center h-full text-purple-400 font-semibold rounded-2xl">
@@ -23,21 +27,21 @@ export function DashboardChart({ data }: { data: { name: string; attendees: numb
         }}
       >
         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E9D5FF" />
-        <XAxis 
-          dataKey="name" 
+        <XAxis
+          dataKey="name"
           tick={{ fill: "#6B21A8", fontSize: 12, fontWeight: 600 }}
           axisLine={false}
           tickLine={false}
           dy={10}
         />
-        <YAxis 
+        <YAxis
           tick={{ fill: "#6B21A8", fontSize: 12, fontWeight: 600 }}
           axisLine={false}
           tickLine={false}
           dx={-10}
           allowDecimals={false}
         />
-        <Tooltip 
+        <Tooltip
           cursor={{ fill: '#F3E8FF' }}
           contentStyle={{ borderRadius: '12px', border: '1px solid #E9D5FF', fontWeight: 600, color: '#4C1D95' }}
         />

@@ -38,7 +38,7 @@ export default function Page() {
             </h1>
             
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-              Ditch the messy spreadsheets and confusing group chats. Discover what's happening on campus, RSVP with a tap, and keep track of everything in one place.
+              Ditch the messy spreadsheets and confusing group chats. Discover what&apos;s happening on campus, RSVP with a tap, and keep track of everything in one place.
             </p>
 
             <div className="flex flex-col items-center justify-center gap-4 pt-4 sm:flex-row">

@@ -48,17 +48,17 @@ export default async function AdminEventDetailsPage({ params }: { params: Promis
         </div>
 
         <div className="flex flex-col items-end gap-6 shrink-0 w-full md:w-64">
-           {/* Admin controls row */}
+          {/* Admin controls row */}
           <div className="flex gap-2">
             {event.is_active === false && (
-               <span className="bg-red-500 text-white px-3 py-1 rounded-lg font-bold text-sm shadow-md flex items-center">Inactive</span>
+              <span className="bg-red-500 text-white px-3 py-1 rounded-lg font-bold text-sm shadow-md flex items-center">Inactive</span>
             )}
             <form action={async () => {
-               "use server";
-               const { toggleEventActive } = await import("@repo/db");
-               const { revalidatePath } = await import("next/cache");
-               await toggleEventActive(event.id, event.is_active !== false);
-               revalidatePath(`/admin/events/${id}`);
+              "use server";
+              const { toggleEventActive } = await import("@repo/db");
+              const { revalidatePath } = await import("next/cache");
+              await toggleEventActive(event.id, event.is_active !== false);
+              revalidatePath(`/admin/events/${id}`);
             }}>
               <button type="submit" className="bg-white/10 hover:bg-white/20 text-white font-bold px-4 py-2 rounded-xl backdrop-blur-sm border border-white/20 transition-colors shadow-sm">
                 {event.is_active === false ? "Mark as Active" : "Mark as Inactive"}
@@ -72,9 +72,9 @@ export default async function AdminEventDetailsPage({ params }: { params: Promis
               <img src={event.image_url} alt={event.title} className="w-full h-full object-cover" />
             </div>
           ) : (
-             <div className="w-full aspect-video md:aspect-square bg-purple-800/50 rounded-xl border border-dashed border-purple-700 flex items-center justify-center text-purple-400 font-semibold text-sm">
-               No Image Provide
-             </div>
+            <div className="w-full aspect-video md:aspect-square bg-purple-800/50 rounded-xl border border-dashed border-purple-700 flex items-center justify-center text-purple-400 font-semibold text-sm">
+              No Image Provide
+            </div>
           )}
         </div>
       </div>
@@ -82,7 +82,7 @@ export default async function AdminEventDetailsPage({ params }: { params: Promis
       {/* RSVPs Table */}
       <div>
         <h2 className="text-2xl font-bold text-purple-900 mb-4">Event Applications</h2>
-        
+
         <div className="bg-white rounded-xl shadow-sm border border-purple-100 overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -110,18 +110,17 @@ export default async function AdminEventDetailsPage({ params }: { params: Promis
                       {rsvp.profiles?.email || 'N/A'}
                     </td>
                     <td className="p-4">
-                      <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${
-                        rsvp.status === 'attending' ? 'bg-green-100 text-green-700' :
-                        rsvp.status === 'maybe' ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-red-100 text-red-700'
-                      }`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${rsvp.status === 'attending' ? 'bg-green-100 text-green-700' :
+                          rsvp.status === 'maybe' ? 'bg-yellow-100 text-yellow-700' :
+                            'bg-red-100 text-red-700'
+                        }`}>
                         {rsvp.status}
                       </span>
                     </td>
                     <td className="p-4 text-right">
                       <form action={handleRemoveRsvp}>
                         <input type="hidden" name="rsvpId" value={rsvp.id} />
-                        <button 
+                        <button
                           type="submit"
                           className="px-3 py-1 bg-red-50 text-red-600 hover:bg-red-100 hover:text-red-700 transition-colors font-bold text-sm rounded-lg"
                         >

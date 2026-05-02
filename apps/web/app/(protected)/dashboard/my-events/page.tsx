@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import Link from "next/link";
 import { StatusSelector } from "./StatusSelector";
 
+type RSVP = Awaited<ReturnType<typeof getUserRSVPs>>[number];
+
 export default async function MyEventsPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -12,10 +14,10 @@ export default async function MyEventsPage() {
     return <div>Please login first.</div>;
   }
 
-  let rsvps: any[] = []; // keeping any to avoid complex TS types for now
+  let rsvps: RSVP[] = [];
   try {
     rsvps = await getUserRSVPs(user.id);
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err);
   }
 
@@ -51,16 +53,15 @@ export default async function MyEventsPage() {
                         {new Date(evt.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
                       </CardDescription>
                     </div>
-                    <span className={`px-3 py-1 text-xs font-bold uppercase rounded-lg border ${
-                      rsvp.status === 'attending' ? 'bg-green-50 text-green-700 border-green-200' :
-                      rsvp.status === 'maybe' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
-                      'bg-red-50 text-red-700 border-red-200'
-                    }`}>
+                    <span className={`px-3 py-1 text-xs font-bold uppercase rounded-lg border ${rsvp.status === 'attending' ? 'bg-green-50 text-green-700 border-green-200' :
+                        rsvp.status === 'maybe' ? 'bg-yellow-50 text-yellow-700 border-yellow-200' :
+                          'bg-red-50 text-red-700 border-red-200'
+                      }`}>
                       {rsvp.status}
                     </span>
                   </div>
                 </CardHeader>
-                
+
                 <CardContent className="p-6 flex-1 bg-purple-50/30">
                   <p className="text-sm text-purple-800 font-medium whitespace-pre-wrap line-clamp-3">
                     {evt.description}
@@ -68,15 +69,15 @@ export default async function MyEventsPage() {
                 </CardContent>
 
                 <CardFooter className="p-6 bg-white flex flex-col gap-3 rounded-b-2xl border-t border-purple-50">
-                   <div className="w-full">
-                     <p className="text-xs font-bold text-purple-500 mb-2 uppercase">Change Status</p>
-                     <StatusSelector eventId={evt.id} currentStatus={rsvp.status} />
-                   </div>
-                   <Link href={`/events/${evt.id}`} className="w-full">
-                     <button className="w-full py-2 bg-purple-100 text-purple-700 font-bold rounded-lg text-sm hover:bg-purple-200 transition-colors">
-                       View Event Details
-                     </button>
-                   </Link>
+                  <div className="w-full">
+                    <p className="text-xs font-bold text-purple-500 mb-2 uppercase">Change Status</p>
+                    <StatusSelector eventId={evt.id} currentStatus={rsvp.status} />
+                  </div>
+                  <Link href={`/events/${evt.id}`} className="w-full">
+                    <button className="w-full py-2 bg-purple-100 text-purple-700 font-bold rounded-lg text-sm hover:bg-purple-200 transition-colors">
+                      View Event Details
+                    </button>
+                  </Link>
                 </CardFooter>
               </Card>
             );

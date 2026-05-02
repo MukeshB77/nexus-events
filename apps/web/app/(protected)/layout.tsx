@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Calendar, LayoutDashboard, Settings } from "lucide-react";
 import { LogoutButton } from "@/components/LogoutButton";
 import { createClient } from "@/lib/supabase/server";
 import { SidebarNav } from "./SidebarNav";

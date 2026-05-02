@@ -25,7 +25,7 @@ const formSchema = z.object({
   startDate: z.string().min(1, "Start Date is required"),
   startTime: z.string().min(1, "Start Time is required"),
   location: z.string().min(1, "Location is required"),
-  capacity: z.union([z.string(), z.number()]).optional(),
+  capacity: z.number().int().positive().optional(),
 });
 
 export default function CreateEventPage() {
@@ -97,8 +97,9 @@ export default function CreateEventPage() {
 
       router.push("/admin/events");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message || "Failed to create event");
+    } catch (err: unknown) {
+      const error = err instanceof Error ? err : new Error(String(err));
+      setError(error.message || "Failed to create event");
       setLoading(false);
     }
   }
@@ -199,7 +200,7 @@ export default function CreateEventPage() {
                 name="startTime"
                 render={({ field }) => {
                   const timeParts = field.value ? field.value.split(":") : ["12", "00"];
-                  let h24 = parseInt(timeParts[0] || "12", 10);
+                  const h24 = parseInt(timeParts[0] || "12", 10);
                   const min = timeParts[1] || "00";
                   const ampm = h24 >= 12 ? "PM" : "AM";
                   

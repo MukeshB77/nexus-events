@@ -23,7 +23,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function LoginForm() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState<"member" | "admin">("member");
@@ -216,7 +215,7 @@ export function LoginForm() {
         </div>
 
         <div className="mt-8 text-center text-sm font-medium text-purple-700">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/register" className="font-bold text-purple-600 hover:text-purple-800 transition-colors underline-offset-4 hover:underline">
             Sign up
           </Link>
