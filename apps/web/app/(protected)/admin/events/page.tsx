@@ -3,13 +3,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default async function AdminEventsPage() {
-  let events: any[] = [];
+  let events: any[] = []; // keeping any to avoid complex TS types for now
   let errorMsg = null;
   try {
     events = await getEvents();
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Failed to fetch admin events:", error);
-    errorMsg = error.message || JSON.stringify(error);
+    errorMsg = error instanceof Error ? error.message : JSON.stringify(error);
   }
 
   return (

@@ -12,7 +12,7 @@ export default async function MyEventsPage() {
     return <div>Please login first.</div>;
   }
 
-  let rsvps: any[] = [];
+  let rsvps: any[] = []; // keeping any to avoid complex TS types for now
   try {
     rsvps = await getUserRSVPs(user.id);
   } catch (err) {
@@ -28,7 +28,7 @@ export default async function MyEventsPage() {
 
       {rsvps.length === 0 ? (
         <div className="bg-white rounded-2xl p-12 text-center border border-purple-100 shadow-sm">
-          <p className="text-purple-500 font-bold text-lg mb-4">You haven't applied to any events yet.</p>
+          <p className="text-purple-500 font-bold text-lg mb-4">You haven&apos;t applied to any events yet.</p>
           <Link href="/dashboard" className="inline-flex bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-bold shadow-md transition-all">
             Browse Events
           </Link>

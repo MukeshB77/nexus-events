@@ -1,5 +1,6 @@
 import { getEventById, getEventRSVPs, deleteRSVP } from "@repo/db";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
 export default async function AdminEventDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -23,9 +24,9 @@ export default async function AdminEventDetailsPage({ params }: { params: Promis
     <div className="max-w-6xl mx-auto p-8 space-y-8">
       {/* Back Button */}
       <div>
-        <a href="/admin/events" className="inline-flex items-center text-purple-600 hover:text-purple-800 hover:bg-purple-50 px-3 py-2 rounded-lg font-semibold transition-all -ml-3">
+        <Link href="/admin/events" className="inline-flex items-center text-purple-600 hover:text-purple-800 hover:bg-purple-50 px-3 py-2 rounded-lg font-semibold transition-all -ml-3">
           ← Back to Admin Events
-        </a>
+        </Link>
       </div>
 
       {/* Event Header */}

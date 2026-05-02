@@ -2,7 +2,7 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-export function DashboardChart({ data }: { data: any[] }) {
+export function DashboardChart({ data }: { data: { name: string; attendees: number; [key: string]: unknown }[] }) {
   if (!data || data.length === 0) {
     return (
       <div className="flex bg-purple-50 justify-center items-center h-full text-purple-400 font-semibold rounded-2xl">

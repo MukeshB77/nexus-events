@@ -1,22 +1,21 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Search } from "lucide-react";
 import { getEvents } from "@repo/db";
 import Link from "next/link";
+import Image from "next/image";
 
 import { SearchBar } from "@/components/SearchBar";
 
 export default async function EventsPage({ searchParams }: { searchParams: Promise<{ q?: string; filter?: string }> }) {
   const { q, filter } = await searchParams;
-  let dbEvents: any[] = [];
+  let dbEvents: any[] = []; // keeping any to avoid complex TS types for now
   let errorMsg = null;
   
   try {
     dbEvents = await getEvents();
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Failed to fetch events:", error);
-    errorMsg = error.message || JSON.stringify(error);
+    errorMsg = error instanceof Error ? error.message : JSON.stringify(error);
   }
   
   let validEvents = dbEvents;
